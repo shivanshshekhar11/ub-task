@@ -1,0 +1,16 @@
+{
+  "name": "ub-task",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev --workspace=backend",
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "test": "npm test --workspace=backend",
+    "test:coverage": "npm run test:coverage --workspace=backend",
+    "build:frontend": "npm run build --workspace=frontend"
+  }
+}

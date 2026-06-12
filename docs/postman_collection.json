@@ -1,0 +1,230 @@
+{
+  "info": {
+    "name": "Uniblox Store API",
+    "_postman_id": "ub-task-collection",
+    "description": "E-commerce store API — cart, checkout, discount system, and admin endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3001" },
+    { "key": "cartId", "value": "test-cart-001" }
+  ],
+  "item": [
+    {
+      "name": "🌱 Seed",
+      "item": [
+        {
+          "name": "Reset & Seed Store",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/seed",
+            "description": "Clears all state and re-seeds the product catalog. Idempotent."
+          }
+        }
+      ]
+    },
+    {
+      "name": "📦 Products",
+      "item": [
+        {
+          "name": "List All Products",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/products"
+          }
+        },
+        {
+          "name": "Get Product by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/products/prod-1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🛒 Cart",
+      "item": [
+        {
+          "name": "Get Cart",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/cart/{{cartId}}"
+          }
+        },
+        {
+          "name": "Add Item to Cart",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/cart/{{cartId}}/items",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productId\": \"prod-1\",\n  \"quantity\": 2\n}"
+            }
+          }
+        },
+        {
+          "name": "Add Second Item",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/cart/{{cartId}}/items",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productId\": \"prod-2\",\n  \"quantity\": 1\n}"
+            }
+          }
+        },
+        {
+          "name": "Update Item Quantity",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/cart/{{cartId}}/items/prod-1",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": 3\n}"
+            }
+          }
+        },
+        {
+          "name": "Remove Item from Cart",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/cart/{{cartId}}/items/prod-2"
+          }
+        }
+      ]
+    },
+    {
+      "name": "💳 Checkout",
+      "item": [
+        {
+          "name": "Checkout (No Discount)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/checkout",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cartId\": \"{{cartId}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Checkout (With Discount Code)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/checkout",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cartId\": \"{{cartId}}\",\n  \"discountCode\": \"SAVE10-XXXXXXXX\"\n}"
+            },
+            "description": "Replace SAVE10-XXXXXXXX with an actual code from GET /api/admin/stats"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔧 Admin",
+      "item": [
+        {
+          "name": "Get Store Stats",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/admin/stats"
+          }
+        },
+        {
+          "name": "Get Discount Status",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/admin/discount/status"
+          }
+        },
+        {
+          "name": "Generate Discount Code",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/admin/discount/generate",
+            "description": "Only succeeds if Nth-order condition is met. Returns 400 otherwise."
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔥 Full Flow Demo",
+      "description": "Run these in order to test the complete discount flow.\n\nSetup: start the backend with DISCOUNT_ORDER_INTERVAL=2 so you only need 2 orders.\n\nThe flow: place order #1 → admin generates code before order #2 (window is open) → place order #2 with the code → order #2 gets 10% off.",
+      "item": [
+        {
+          "name": "Step 1 — Seed Store",
+          "request": { "method": "POST", "url": "{{baseUrl}}/api/seed" }
+        },
+        {
+          "name": "Step 2 — Add Item (Cart A)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/cart/cart-a/items",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"productId\":\"prod-2\",\"quantity\":1}" }
+          }
+        },
+        {
+          "name": "Step 3 — Checkout (Order #1, no discount yet)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/checkout",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"cartId\":\"cart-a\"}" },
+            "description": "Places order #1. With N=2, the code generation window is now open."
+          }
+        },
+        {
+          "name": "Step 4 — Check Discount Status (window should be open)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/admin/discount/status",
+            "description": "eligible should be true. windowOpensAfterOrder=1, windowClosesAfterOrder=2."
+          }
+        },
+        {
+          "name": "Step 5 — Admin Generates Discount Code",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/admin/discount/generate",
+            "description": "Returns the generated code (e.g. SAVE10-A1B2C3D4). Copy it for Step 7. Returns 400 if window not open."
+          }
+        },
+        {
+          "name": "Step 6 — Add Item (Cart B)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/cart/cart-b/items",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"productId\":\"prod-1\",\"quantity\":1}" }
+          }
+        },
+        {
+          "name": "Step 7 — Checkout (Order #2) with Discount Code",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/checkout",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"cartId\":\"cart-b\",\"discountCode\":\"REPLACE_WITH_CODE_FROM_STEP_5\"}" },
+            "description": "The Nth order uses the code and gets 10% off. Code is marked as used immediately."
+          }
+        },
+        {
+          "name": "Step 8 — Check Stats (confirm discount applied)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/admin/stats",
+            "description": "totalDiscountAmount shows the saving. discountCodes[0].isUsed should be true, usedByOrderId set."
+          }
+        }
+      ]
+    }
+  ]
+}
