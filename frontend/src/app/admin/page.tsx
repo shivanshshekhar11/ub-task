@@ -83,7 +83,10 @@ export default function AdminPage() {
     }
   }, []);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    load();
+  }, [load]);
 
   const handleGenerate = async () => {
     setGenerating(true);

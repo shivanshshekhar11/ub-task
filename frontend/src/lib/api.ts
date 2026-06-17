@@ -20,7 +20,6 @@ import {
   CheckoutResponse,
   DiscountCode,
   DiscountStatus,
-  Order,
   Product,
   StoreStats,
   // Validators & helpers

@@ -50,6 +50,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   // Initialise cart ID from localStorage on mount
   useEffect(() => {
     const id = getOrCreateCartId();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCartId(id);
     // Try to fetch existing cart
     api.getCart(id).then(setCart).catch(() => null);

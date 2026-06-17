@@ -9,8 +9,14 @@
   "scripts": {
     "dev:backend": "npm run dev --workspace=backend",
     "dev:frontend": "npm run dev --workspace=frontend",
+    "build": "npm run build --workspace=backend && npm run build --workspace=frontend",
+    "build:backend": "npm run build --workspace=backend",
+    "build:frontend": "npm run build --workspace=frontend",
+    "lint": "npm run lint --workspace=backend && npm run lint --workspace=frontend",
+    "lint:backend": "npm run lint --workspace=backend",
+    "lint:frontend": "npm run lint --workspace=frontend",
     "test": "npm test --workspace=backend",
-    "test:coverage": "npm run test:coverage --workspace=backend",
-    "build:frontend": "npm run build --workspace=frontend"
+    "test:watch": "npm run test:watch --workspace=backend",
+    "test:coverage": "npm run test:coverage --workspace=backend"
   }
 }
