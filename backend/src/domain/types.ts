@@ -15,6 +15,8 @@
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
+import type { CartItem, OrderItem } from '@ub-task/shared-types';
+
 // Re-export types that have no date fields — truly shared, no override needed
 export type {
   Product,
@@ -30,7 +32,7 @@ export type {
 
 export interface Cart {
   id: string;
-  items: import('@ub-task/shared-types').CartItem[];
+  items: CartItem[];
   /** JS Date stored internally; serialised to ISO string at HTTP boundary */
   createdAt: Date;
   /** JS Date stored internally; serialised to ISO string at HTTP boundary */
@@ -41,7 +43,7 @@ export interface Order {
   id: string;
   /** Sequential counter across all orders — used to evaluate discount milestones */
   orderNumber: number;
-  items: import('@ub-task/shared-types').OrderItem[];
+  items: OrderItem[];
   subtotal: number;
   discountCode?: string;
   discountPercent: number;

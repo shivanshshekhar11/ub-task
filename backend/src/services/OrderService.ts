@@ -1,9 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Order } from '../domain/types';
-import { AppError } from '../errors/AppError';
-import { store } from '../store/InMemoryStore';
-import { cartService } from './CartService';
-import { discountService } from './DiscountService';
+import { Order } from '../domain/types.ts';
+import { AppError } from '../errors/AppError.ts';
+import { store } from '../store/InMemoryStore.ts';
+import { cartService } from './CartService.ts';
+import { discountService } from './DiscountService.ts';
 
 /**
  * OrderService — orchestrates the full checkout flow.

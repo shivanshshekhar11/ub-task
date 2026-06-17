@@ -1,6 +1,6 @@
 {
-  "watch": ["src"],
+  "watch": ["src", "../packages/shared-types"],
   "ext": "ts",
   "ignore": ["**/*.test.ts", "dist"],
-  "exec": "ts-node src/server.ts"
+  "exec": "tsx src/server.ts"
 }

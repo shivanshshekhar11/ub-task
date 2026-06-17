@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { addItemSchema, updateItemSchema } from '@ub-task/shared-types';
-import { validate } from '../middleware/validate';
-import { cartService } from '../services/CartService';
+import { validate } from '../middleware/validate.ts';
+import { cartService } from '../services/CartService.ts';
 
 export const cartRouter = Router();
 

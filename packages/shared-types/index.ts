@@ -22,10 +22,10 @@
  */
 
 // validators.ts calls extendZodWithOpenApi — must be imported before schemas.ts
-export * from './validators';
+export * from './validators.ts';
 
 // Domain Zod schemas (with .openapi annotations) + inferred TypeScript types
-export * from './schemas';
+export * from './schemas.ts';
 
 // ── Inferred domain types ─────────────────────────────────────────────────────
 // These replace the hand-written interfaces. They are derived from the Zod schemas

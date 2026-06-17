@@ -1,6 +1,6 @@
 import 'dotenv/config'; // must be first — populates process.env before config reads it
-import { app } from './app';
-import { config, getConfigErrors } from './config';
+import { app } from './app.ts';
+import { config, getConfigErrors } from './config/index.ts';
 
 // ── Fail-fast config validation ───────────────────────────────────────────────
 // N and X are only meaningful for the discount system, but a misconfigured

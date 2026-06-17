@@ -1,6 +1,6 @@
-import { Cart, CartItem } from '../domain/types';
-import { AppError } from '../errors/AppError';
-import { store } from '../store/InMemoryStore';
+import { Cart, CartItem } from '../domain/types.ts';
+import { AppError } from '../errors/AppError.ts';
+import { store } from '../store/InMemoryStore.ts';
 
 /**
  * CartService — handles all cart mutation and retrieval logic.

@@ -1,4 +1,4 @@
-import { Cart, DiscountCode, Order, Product } from '../domain/types';
+import { Cart, DiscountCode, Order, Product } from '../domain/types.ts';
 
 // ─── Seed Data ────────────────────────────────────────────────────────────────
 // Insurance-themed products — a nod to Uniblox's domain.

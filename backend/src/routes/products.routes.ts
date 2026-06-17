@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { store } from '../store/InMemoryStore';
+import { store } from '../store/InMemoryStore.ts';
 
 export const productsRouter = Router();
 

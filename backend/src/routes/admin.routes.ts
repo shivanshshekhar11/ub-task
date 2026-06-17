@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { discountService } from '../services/DiscountService';
-import { statsService } from '../services/StatsService';
-import { config } from '../config';
-import { store } from '../store/InMemoryStore';
+import { discountService } from '../services/DiscountService.ts';
+import { statsService } from '../services/StatsService.ts';
+import { config } from '../config/index.ts';
+import { store } from '../store/InMemoryStore.ts';
 
 export const adminRouter = Router();
 

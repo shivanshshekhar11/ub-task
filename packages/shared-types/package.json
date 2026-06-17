@@ -1,6 +1,7 @@
 {
   "name": "@ub-task/shared-types",
   "version": "1.0.0",
+  "type": "module",
   "private": true,
   "description": "Shared TypeScript types and Zod validators for Uniblox Store — consumed by both backend and frontend.",
   "main": "./index.ts",

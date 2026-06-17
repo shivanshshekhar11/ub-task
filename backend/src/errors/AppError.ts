@@ -4,11 +4,11 @@
  * error-handler middleware can return the correct HTTP status.
  */
 export class AppError extends Error {
-  constructor(
-    public readonly statusCode: number,
-    message: string,
-  ) {
+  readonly statusCode: number;
+
+  constructor(statusCode: number, message: string) {
     super(message);
+    this.statusCode = statusCode;
     this.name = 'AppError';
     // Maintain correct prototype chain in transpiled code
     Object.setPrototypeOf(this, AppError.prototype);

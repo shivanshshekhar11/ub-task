@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
-import { config, getConfigErrors } from '../config';
-import { DiscountCode } from '../domain/types';
-import { AppError } from '../errors/AppError';
-import { store } from '../store/InMemoryStore';
+import { config, getConfigErrors } from '../config/index.ts';
+import { DiscountCode } from '../domain/types.ts';
+import { AppError } from '../errors/AppError.ts';
+import { store } from '../store/InMemoryStore.ts';
 
 /**
  * DiscountService — manages the nth-order coupon system.

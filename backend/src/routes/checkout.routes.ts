@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { checkoutSchema } from '@ub-task/shared-types';
-import { validate } from '../middleware/validate';
-import { orderService } from '../services/OrderService';
+import { validate } from '../middleware/validate.ts';
+import { orderService } from '../services/OrderService.ts';
 
 export const checkoutRouter = Router();
 

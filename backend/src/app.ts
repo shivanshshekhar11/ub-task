@@ -2,13 +2,13 @@ import express from 'express';
 import cors from 'cors';
 import { apiReference } from '@scalar/express-api-reference';
 
-import { errorHandler } from './middleware/errorHandler';
-import { productsRouter } from './routes/products.routes';
-import { cartRouter } from './routes/cart.routes';
-import { checkoutRouter } from './routes/checkout.routes';
-import { adminRouter } from './routes/admin.routes';
-import { seedRouter } from './routes/seed.routes';
-import { generateSpec } from './swagger/openapi';
+import { errorHandler } from './middleware/errorHandler.ts';
+import { productsRouter } from './routes/products.routes.ts';
+import { cartRouter } from './routes/cart.routes.ts';
+import { checkoutRouter } from './routes/checkout.routes.ts';
+import { adminRouter } from './routes/admin.routes.ts';
+import { seedRouter } from './routes/seed.routes.ts';
+import { generateSpec } from './swagger/openapi.ts';
 
 // ── App ──────────────────────────────────────────────────────────────────────
 const app = express();

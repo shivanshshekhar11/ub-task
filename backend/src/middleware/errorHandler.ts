@@ -1,5 +1,5 @@
-import { ErrorRequestHandler } from 'express';
-import { AppError } from '../errors/AppError';
+import type { Request, Response, NextFunction } from 'express';
+import { AppError } from '../errors/AppError.ts';
 
 /**
  * Global Express error-handling middleware.
@@ -9,7 +9,12 @@ import { AppError } from '../errors/AppError';
  * Distinguishes between known AppErrors (operational errors that should
  * surface to the client) and unexpected errors (bugs, which return 500).
  */
-export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
+export const errorHandler = (
+  err: any,
+  _req: Request,
+  res: Response,
+  _next: NextFunction,
+) => {
   if (err instanceof AppError) {
     res.status(err.statusCode).json({
       error: err.message,

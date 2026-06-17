@@ -1,5 +1,5 @@
 import { StoreStats } from '@ub-task/shared-types';
-import { store } from '../store/InMemoryStore';
+import { store } from '../store/InMemoryStore.ts';
 
 /**
  * StatsService — aggregates analytics from the in-memory store.
